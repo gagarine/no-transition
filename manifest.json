@@ -1,0 +1,23 @@
+{
+
+  "description": "Disable all the shiny and inappropriate animations made with CSS3 animations, CSS3 transforms and CSS3 transitions",
+  "manifest_version": 2,
+  "name": "no-transition",
+  "version": "1.0",
+  "homepage_url": "http://github.com/gagarine/no-transition",
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "page_action": {
+    "default_icon": "icons/off.svg",
+    "browser_style": true
+  },
+  
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ]
+
+}
