@@ -1,16 +1,13 @@
+'use strict';
+
 const CSS = `
 * {
+  /*CSS transition*/
   -o-transition-property: none !important;
   -moz-transition-property: none !important;
   -ms-transition-property: none !important;
   -webkit-transition-property: none !important;
   transition-property: none !important;
-  /*CSS transforms*/
-  -o-transform: none !important;
-  -moz-transform: none !important;
-  -ms-transform: none !important;
-  -webkit-transform: none !important;
-  transform: none !important;
   /*CSS animations*/
   -webkit-animation: none !important;
   -moz-animation: none !important;
@@ -20,71 +17,53 @@ const CSS = `
  }
 `;
 
-const TITLE_APPLY = "Transition off";
-const TITLE_REMOVE = "Transition on";
-const APPLICABLE_PROTOCOLS = ["http:", "https:"];
+let playTransition = false;
+//init
+toogleTransition();
 
-/*
-Toggle CSS: based on the current title, insert or remove the CSS.
-Update the page action's title and icon to reflect its state.
-*/
-function toggleCSS(tab) {
+browser.browserAction.onClicked.addListener(handleClick);
 
-  function gotTitle(title) {
-    if (title === TITLE_APPLY) {
-      browser.pageAction.setIcon({tabId: tab.id, path: "icons/on.svg"});
-      browser.pageAction.setTitle({tabId: tab.id, title: TITLE_REMOVE});
-      browser.tabs.insertCSS({code: CSS});
-    } else {
-      browser.pageAction.setIcon({tabId: tab.id, path: "icons/off.svg"});
-      browser.pageAction.setTitle({tabId: tab.id, title: TITLE_APPLY});
-      browser.tabs.removeCSS({code: CSS});
+function handleClick(){
+  console.log('---clik---');
+  playTransition = !playTransition;
+  toogleTransition();
+}
+
+function toogleTransition(){
+    if(playTransition == false) {
+    disableAllTabsTransition();
+    browser.browserAction.setIcon({path: "icons/play.svg"});
+  } else{
+    enableAllTabsTransition();
+    browser.browserAction.setIcon({path: "icons/pause.svg"});
+  }
+}
+
+function disableAllTabsTransition(){
+  console.log('---disableAllTabsTransition---');
+  var gettingAllTabs = browser.tabs.query({});
+  gettingAllTabs.then((tabs) => {
+    for (let tab of tabs) {
+      disableTabTransition(tab);
     }
-  }
-
-  var gettingTitle = browser.pageAction.getTitle({tabId: tab.id});
-  gettingTitle.then(gotTitle);
+  });
 }
 
-/*
-Returns true only if the URL's protocol is in APPLICABLE_PROTOCOLS.
-*/
-function protocolIsApplicable(url) {
-  var anchor =  document.createElement('a');
-  anchor.href = url;
-  return APPLICABLE_PROTOCOLS.includes(anchor.protocol);
+function disableTabTransition(tab){
+  browser.tabs.insertCSS(tab.id, {code: CSS});
 }
 
-/*
-Initialize the page action: set icon and title, then show.
-Only operates on tabs whose URL's protocol is applicable.
-*/
-function initializePageAction(tab) {
-  if (protocolIsApplicable(tab.url)) {
-    browser.pageAction.setIcon({tabId: tab.id, path: "icons/off.svg"});
-    browser.pageAction.setTitle({tabId: tab.id, title: TITLE_APPLY});
-    browser.pageAction.show(tab.id);
-  }
+function enableAllTabsTransition(){
+  console.log('---disableAllTabsTransition---');
+  var gettingAllTabs = browser.tabs.query({});
+  gettingAllTabs.then((tabs) => {
+    for (let tab of tabs) {
+      enableTabTransition(tab, {code: CSS});
+    }
+  });
 }
 
-/*
-When first loaded, initialize the page action for all tabs.
-*/
-var gettingAllTabs = browser.tabs.query({});
-gettingAllTabs.then((tabs) => {
-  for (tab of tabs) {
-    initializePageAction(tab);
-  }
-});
 
-/*
-Each time a tab is updated, reset the page action for that tab.
-*/
-browser.tabs.onUpdated.addListener((id, changeInfo, tab) => {
-  initializePageAction(tab);
-});
-
-/*
-Toggle CSS when the page action is clicked.
-*/
-browser.pageAction.onClicked.addListener(toggleCSS);
+function enableTabTransition(tab){
+  browser.tabs.removeCSS(tab.id, {code: CSS});
+}
