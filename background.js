@@ -22,11 +22,18 @@ let playTransition = false;
 toogleTransition();
 
 browser.browserAction.onClicked.addListener(handleClick);
+browser.tabs.onUpdated.addListener(handeTabUpdate)
 
 function handleClick(){
   console.log('---clik---');
   playTransition = !playTransition;
   toogleTransition();
+}
+
+function handeTabUpdate(tabId, changeInfo, tabInfo){
+  if(playTransition == false){
+    disableTabTransition(tabId);
+  }
 }
 
 function toogleTransition(){
