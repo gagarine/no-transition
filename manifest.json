@@ -1,31 +1,31 @@
 {
 
-  "description": "Disable all the shiny and inappropriate CSS3 animations",
-  "manifest_version": 2,
-  "name": "No Transition",
-  "version": "1.1.1",
-  "homepage_url": "http://github.com/gagarine/no-transition",
-  "license": "Mozilla Public License, version 2.0",
-  "author": "Simon Perdrisat",
+    "description": "Disable all the shiny and inappropriate CSS3 animations",
+    "manifest_version": 2,
+    "name": "No Transition",
+    "version": "1.1.1",
+    "homepage_url": "http://github.com/gagarine/no-transition",
+    "license": "Mozilla Public License, version 2.0",
+    "author": "Simon Perdrisat",
 
-  "background": {
-    "scripts": ["background.js"]
-  },
+    "background": {
+        "scripts": ["background.js"]
+    },
 
- "browser_action": {
-  "browser_style": false,
-  "default_icon": "icons/pause.svg",
-  "default_title": "Pause annimation"
-},
- "icons": {
-    "48": "icon.png",
-    "96": "icon@2x.png"
-  },
-  
-  "permissions": [
-    "activeTab",
-    "tabs",
-    "storage",
-    "<all_urls>"
-  ]
+    "browser_action": {
+        "browser_style": false,
+        "default_icon": "icons/pause.svg",
+        "default_title": "Pause annimations on all tabs"
+    },
+    "icons": {
+        "48": "icon.png",
+        "96": "icon@2x.png"
+    },
+
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "storage",
+        "<all_urls>"
+    ]
 }
