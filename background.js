@@ -25,7 +25,6 @@ browser.browserAction.onClicked.addListener(handleClick);
 browser.tabs.onUpdated.addListener(handeTabUpdate)
 
 function handleClick(){
-  console.log('---clik---');
   playTransition = !playTransition;
   toogleTransition();
 }
@@ -47,8 +46,7 @@ function toogleTransition(){
 }
 
 function disableAllTabsTransition(){
-  console.log('---disableAllTabsTransition---');
-  var gettingAllTabs = browser.tabs.query({});
+  let gettingAllTabs = browser.tabs.query({});
   gettingAllTabs.then((tabs) => {
     for (let tab of tabs) {
       disableTabTransition(tab);
@@ -61,11 +59,10 @@ function disableTabTransition(tab){
 }
 
 function enableAllTabsTransition(){
-  console.log('---disableAllTabsTransition---');
-  var gettingAllTabs = browser.tabs.query({});
+  let gettingAllTabs = browser.tabs.query({});
   gettingAllTabs.then((tabs) => {
     for (let tab of tabs) {
-      enableTabTransition(tab, {code: CSS});
+      enableTabTransition(tab);
     }
   });
 }
