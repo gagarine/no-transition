@@ -1,18 +1,12 @@
 'use strict';
 
 const CSS = `
-* {
+body * {
   /*CSS transition*/
-  -o-transition-property: none !important;
-  -moz-transition-property: none !important;
-  -ms-transition-property: none !important;
-  -webkit-transition-property: none !important;
-  transition-property: none !important;
+  // transition-duration: 0s !important;
+  // transition-property: none !important;
+  transition: none !important;
   /*CSS animations*/
-  -webkit-animation: none !important;
-  -moz-animation: none !important;
-  -o-animation: none !important;
-  -ms-animation: none !important;
   animation: none !important;
  }
 `;
@@ -57,7 +51,7 @@ function disableAllTabsTransition() {
 }
 
 function disableTabTransition(tab) {
-    browser.tabs.insertCSS(tab.id, { code: CSS });
+    browser.tabs.insertCSS(tab.id, { code: CSS, cssOrigin: 'user' });
 }
 
 function enableAllTabsTransition() {
@@ -71,5 +65,5 @@ function enableAllTabsTransition() {
 
 
 function enableTabTransition(tab) {
-    browser.tabs.removeCSS(tab.id, { code: CSS });
+    browser.tabs.removeCSS(tab.id, { code: CSS, cssOrigin: 'user' });
 }
