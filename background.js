@@ -42,8 +42,7 @@ function toogleTransition() {
 }
 
 function disableAllTabsTransition() {
-    let gettingAllTabs = browser.tabs.query({});
-    gettingAllTabs.then((tabs) => {
+    browser.tabs.query({}).then((tabs) => {
         for (let tab of tabs) {
             disableTabTransition(tab);
         }
@@ -55,8 +54,7 @@ function disableTabTransition(tab) {
 }
 
 function enableAllTabsTransition() {
-    let gettingAllTabs = browser.tabs.query({});
-    gettingAllTabs.then((tabs) => {
+    browser.tabs.query({}).then((tabs) => {
         for (let tab of tabs) {
             enableTabTransition(tab);
         }
