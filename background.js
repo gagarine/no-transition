@@ -3,8 +3,6 @@
 const CSS = `
 body * {
   /*CSS transition*/
-  // transition-duration: 0s !important;
-  // transition-property: none !important;
   transition: none !important;
   /*CSS animations*/
   animation: none !important;
