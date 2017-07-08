@@ -18,8 +18,8 @@
         "default_title": "Pause annimations on all tabs"
     },
     "icons": {
-        "48": "icon.png",
-        "96": "icon@2x.png"
+        "48": "icon.svg",
+        "96": "icon.svg"
     },
 
     "permissions": [
