@@ -14,21 +14,23 @@ let playTransition = false;
 toogleTransition();
 
 browser.browserAction.onClicked.addListener(handleClick);
-browser.tabs.onUpdated.addListener(handeTabUpdate)
+browser.webNavigation.onCommitted.addListener(handeTabUpdate)
+
 
 function handleClick() {
     playTransition = !playTransition;
     toogleTransition();
 }
 
-function handeTabUpdate(tabId, changeInfo, tabInfo) {
-    if (playTransition == false) {
-        disableTabTransition(tabId);
+function handeTabUpdate(details) {
+	// @todo use details.frameId to inject in the specific updated frame
+    if (playTransition === false) {
+        disableTabTransition(details.tabId);
     }
 }
 
 function toogleTransition() {
-    if (playTransition == false) {
+    if (playTransition === false) {
         disableAllTabsTransition();
         browser.browserAction.setIcon({ path: "icons/play.svg" });
         browser.browserAction.setTitle({ title: 'Restore annimations on all tabs' });
@@ -48,12 +50,12 @@ function disableAllTabsTransition() {
 }
 
 function disableTabTransition(tab) {
-    browser.tabs.insertCSS(tab.id, { code: CSS, cssOrigin: 'user' });
+    browser.tabs.insertCSS(tab.id, { code: CSS, cssOrigin: 'user', allFrames: true });
 }
 
 function enableAllTabsTransition() {
     browser.tabs.query({}).then((tabs) => {
-        for (let tab of tabs) {
+        for (let tab of tabs) {	
             enableTabTransition(tab);
         }
     });
@@ -61,5 +63,5 @@ function enableAllTabsTransition() {
 
 
 function enableTabTransition(tab) {
-    browser.tabs.removeCSS(tab.id, { code: CSS, cssOrigin: 'user' });
+    browser.tabs.removeCSS(tab.id, { code: CSS, cssOrigin: 'user', allFrames: true });
 }
