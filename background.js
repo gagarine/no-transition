@@ -5,7 +5,8 @@ body * {
   /*CSS transition*/
   transition: none !important;
   /*CSS animations*/
-  animation: none !important;
+  animation-delay: 0ms !important;
+  animation-duration: 0ms !important;
  }
 `;
 
