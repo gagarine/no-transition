@@ -1,7 +1,7 @@
 'use strict';
 
 const CSS = `
-body * {
+body *, body *::before, body *::after {
   /*CSS transition*/
   transition: 0.01ms !important;
   transition-delay: 0ms !important;
