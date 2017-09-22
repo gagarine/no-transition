@@ -3,7 +3,7 @@
     "description": "Disable all the shiny and inappropriate CSS3 animations",
     "manifest_version": 2,
     "name": "No Transition",
-    "version": "1.1.7",
+    "version": "1.1.8",
     "homepage_url": "http://github.com/gagarine/no-transition",
     "license": "Mozilla Public License, version 2.0",
     "author": "Simon Perdrisat",
