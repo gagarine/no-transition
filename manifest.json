@@ -15,7 +15,7 @@
     "browser_action": {
         "browser_style": false,
         "default_icon": "icons/pause.svg",
-        "default_title": "Pause annimations on all tabs"
+        "default_title": "Pause animations on all tabs"
     },
     "icons": {
         "48": "icon.svg",
