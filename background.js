@@ -35,11 +35,11 @@ function toogleTransition() {
     if (playTransition === false) {
         disableAllTabsTransition();
         browser.browserAction.setIcon({ path: "icons/play.svg" });
-        browser.browserAction.setTitle({ title: 'Restore annimations on all tabs' });
+        browser.browserAction.setTitle({ title: 'Restore animations on all tabs' });
     } else {
         enableAllTabsTransition();
         browser.browserAction.setIcon({ path: "icons/pause.svg" });
-        browser.browserAction.setTitle({ title: 'Pause annimations on all tabs' });
+        browser.browserAction.setTitle({ title: 'Pause animations on all tabs' });
     }
 }
 
